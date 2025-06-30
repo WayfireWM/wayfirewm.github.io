@@ -3,33 +3,9 @@ title: Wayfire
 layout: master
 ---
 
-<div class="row">
-  <div class="col-md-4">
-    <h1>
-      <img src="/assets/logo.png" id="logo" alt="Wayfire" />
-    </h1>
-    <p>
-      Wayfire is a wayland compositor based on
-      <a href="https://github.com/swaywm/wlroots">wlroots</a>.
-      It aims to create a customizable, extendable and lightweight environment
-      without sacrificing its appearance.
-    </p>
-  </div>
-  <div class="col-md-8">
-    <iframe
-      width="640"
-      height="440"
-      src="https://www.youtube-nocookie.com/embed/videoseries?list=PLb7YRKEhWEBUIoT-a29UoJW9mhfzjpNle"
-      frameborder="0"
-      allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture"
-      allowfullscreen
-    ></iframe>
-  </div>
-</div>
-<div class="row" style="margin-top: 2rem">
-  <div class="col-md-8 offset-md-2">
+<article class="header fade-in">
     {% for post in site.posts %}
     {% include post-stub.html post=post %}
     {% endfor %}
-  </div>
-</div>
+</article>
+

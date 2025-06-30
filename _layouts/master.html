@@ -9,39 +9,47 @@
     <link rel="alternate" type="application/rss+xml"  href="{{ site.url }}/feed.xml" title="{{ site.title }}">
     <title>{{ page.title }}</title>
   </head>
-  <body>
-    <div class="container">
-      <nav class="navbar navbar-light navbar-expand-sm">
-        <a class="navbar-brand" href="/">
-          <img src="/assets/logo.png" height="32" style="margin-top: -4px" />
-          Wayfire
-        </a>
-        <div class="navbar-collapse">
-          <ul class="navbar-nav mr-auto">
-            <li class="nav-item">
-              <a class="nav-link" href="https://github.com/WayfireWM/wayfire/releases">Releases ≫</a>
-            </li>
-            <li class="nav-item">
-              <a class="nav-link" href="https://github.com/WayfireWM/wayfire">Source Code ≫</a>
-            </li>
-            <li class="nav-item">
-              <a class="nav-link" href="https://github.com/WayfireWM/wayfire/wiki">Wiki ≫</a>
-            </li>
-            <li class="nav-item">
-              <a class="nav-link" href="https://web.libera.chat/#wayfire">Support Chat (IRC) ≫</a>
-            </li>
-            <li class="nav-item">
-              <a class="nav-link" href="https://matrix.to/#/#wayfire:matrix.org">Support Chat (Matrix) ≫</a>
-            </li>
-            <li class="nav-item">
-              <a class="nav-link" href="https://discord.gg/5SWAxmBCUH">Support Chat (Discord) ≫</a>
-            </li>
-          </ul>
-        </div>
+<body>
+  <div class="orb"></div>
+  <div class="orb"></div>
+  <div class="orb"></div>
+
+  <div class="container">
+    <header class="header fade-in">
+      <a href="/index.html" style="text-decoration: none;">
+      <h1 class="logo">
+            <img src="https://wayfire.org/assets/logo.png" alt="Wayfire Logo">
+      
+        Wayfire
+      </h1>
+      </a>
+      <p class="tagline">A customizable, extendable and lightweight Wayland compositor</p>
+
+      <nav class="nav-links">
+        <a href="https://github.com/WayfireWM/wayfire/releases" class="nav-link" target="_blank">🚀 Releases</a>
+        <a href="https://github.com/WayfireWM/wayfire" class="nav-link" target="_blank">💻 Source Code</a>
+        <a href="https://github.com/WayfireWM/wayfire/wiki" class="nav-link" target="_blank">📚 Wiki</a>
+        <a href="https://web.libera.chat/#wayfire" class="nav-link" target="_blank">💬 IRC Chat</a>
+        <a href="https://matrix.to/#/#wayfire:matrix.org" class="nav-link" target="_blank">🔗 Matrix</a>
+        <a href="https://discord.gg/5SWAxmBCUH" class="nav-link" target="_blank">🎮 Discord</a>
       </nav>
+
+      <div class="description">
+         <iframe width="730" height="440" src="https://www.youtube.com/embed/Ban7wspkrNQ?list=PLb7YRKEhWEBUIoT-a29UoJW9mhfzjpNle" title="Wayfire: Cube plugin" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+
+        <p>Wayfire is a sleek and extensible Wayland compositor powered by wlroots.
+        </p>
+      </div>
+    </header>
+
+    <main class="fade-in">
+      <h2 class="section-title">Latest Announcements</h2>
+
       <div class="main">
         {{ content }}
       </div>
-    </div>
-  </body>
+    </main>
+  </div>
+</body>
+
 </html>

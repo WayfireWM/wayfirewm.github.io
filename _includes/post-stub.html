@@ -1,5 +1,6 @@
-<div class="post-stub">
-    <h2>
+<article class="header fade-in" onclick="togglePost(this)">
+  <div class="post-excerpt">
+     <h3 class="post-title">
       <span class="title">
         {% if include.post._url %}
         <a href="{{ include.post._url }}" target="_blank">
@@ -13,9 +14,11 @@
       <small class="text-muted hidden-xs">
         {{ include.post.date | date: "%Y-%m-%d" }}
       </small>
-    </h2>
+    </h3>
     {% if include.post._url %}
     {% else %}
     {{ include.post.excerpt }}
     {% endif %}
-</div>
+  </div>
+
+</article>
