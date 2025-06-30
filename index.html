@@ -1,21 +1,613 @@
 ---
-title: Wayfire
 layout: master
 ---
 
-<div class="row">
-  <div class="col-md-4">
-    <h1>
-      <img src="/assets/logo.png" id="logo" alt="Wayfire" />
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="icon" type="image/png" href="/assets/logo.png" />
+    <link rel="alternate" type="application/rss+xml"  href="http://localhost:4000/feed.xml" title="">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet"> <!--master.scss add back @import "bootstrap/scss/bootstrap"; -->
+    <link rel="icon" type="image/png" href="/assets/logo.png" />
+  <title>Wayfire - Wayland Compositor</title>
+  <style>
+  
+    [data-theme="light"] {
+      --primary-color: #ff5e62;
+      --secondary-color: #ff8c50;
+      --accent-color: #667eea;
+      --accent-secondary: #764ba2;
+      --background-gradient: #fff;
+      --text-primary: #353535;
+      --text-secondary: #666;
+      --text-light: #353535;
+      --card-bg: rgba(255, 255, 255, 0.9);
+      --header-bg: rgba(255, 255, 255, 0.03);
+      --description-bg: #e7e7e7;
+      --main-content-bg: --description-bg;
+      --border-color: rgba(255, 255, 255, 0.3);
+    }
+
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+      line-height: 1.6;
+      color: #ffffff;
+      background: var(--background-gradient);
+      min-height: 100vh;
+      overflow-x: hidden;
+      position: relative;
+      transition: background 0.3s ease;
+    }
+
+    /* Light theme specific overrides */
+    [data-theme="light"] body {
+      color: var(--text-primary, #353535);
+    }
+
+    [data-theme="light"] .tagline {
+      color: var(--text-primary, #353535);
+    }
+
+    [data-theme="light"] .description {
+      background: var(--description-bg, #e7e7e7);
+      color: var(--text-primary, #353535);
+    }
+
+    [data-theme="light"] .main-content {
+      background: var(--description-bg, #353535);
+      color: #ffffff;
+    }
+
+    [data-theme="light"] .section-title {
+      color: #333;
+      background: var(--text-primary, #353535);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+    }
+
+    [data-theme="light"] .post-title {
+      color: var(--text-primary, #353535);
+    }
+
+    [data-theme="light"] .post-date {
+      color: var(--text-secondary, #666);
+    }
+
+    [data-theme="light"] .post-excerpt {
+      color: var(--text-primary, #353535);
+    }
+
+    [data-theme="light"] .blog-post {
+      background: var(--card-bg, rgba(255, 255, 255, 0.9));
+      border-left-color: var(--primary-color);
+    }
+
+    [data-theme="light"] .blog-post:hover {
+      border-left-color: var(--secondary-color);
+    }
+
+    [data-theme="light"] .header {
+      background: var(--header-bg, rgba(255, 255, 255, 0.03));
+    }
+
+    [data-theme="light"] .logo {
+      background: var(--text-primary, #353535);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+    }
+
+    [data-theme="light"] .section-title::after {
+      background: linear-gradient(45deg, #fff, #fff);
+    }
+
+    [data-theme="light"] .theme-dropdown {
+      background: rgba(0, 0, 0, 0.1);
+      border: 1px solid rgba(0, 0, 0, 0.2);
+      color: #353535;
+      box-shadow: 0 8px 25px rgba(0, 0, 0, 0.1);
+    }
+
+    /* Optimized static background with minimal animation */
+    body::before {
+      content: '';
+      position: fixed;
+      top: -10%;
+      left: -10%;
+      width: 120%;
+      height: 120%;
+      background: 
+        radial-gradient(ellipse at 20% 20%, rgba(120, 119, 198, 0.1) 0%, transparent 50%),
+        radial-gradient(ellipse at 80% 80%, rgba(255, 118, 117, 0.1) 0%, transparent 50%),
+        radial-gradient(ellipse at 50% 50%, rgba(29, 78, 216, 0.08) 0%, transparent 60%);
+      z-index: -2;
+    }
+
+    [data-theme="light"] body::before {
+      background: none;
+    }
+
+    @keyframes subtleFloat {
+      0%, 100% {
+        transform: scale(1) rotate(0deg);
+      }
+      50% {
+        transform: scale(1.1) rotate(1deg);
+      }
+    }
+
+    /* Simplified orbs with reduced performance impact */
+    .orb {
+      position: fixed;
+      border-radius: 50%;
+      filter: blur(40px);
+      opacity: 0.2;
+      z-index: -1;
+      pointer-events: none;
+      transition: background 0.3s ease;
+    }
+
+    [data-theme="light"] .orb {
+      opacity: 0.1;
+    }
+
+    .container {
+      max-width: 1400px;
+      margin: 0 auto;
+      padding: 0px;
+      position: relative;
+      z-index: 1;
+    }
+
+    .header {
+      background: rgba(255, 255, 255, 0.03);
+      border-radius: 25px;
+      padding: 40px;
+      margin-bottom: 40px;
+      box-shadow:
+        0 30px 80px rgba(0, 0, 0, 0.4),
+        inset 0 1px 0 rgba(255, 255, 255, 0.1),
+        0 0 100px rgba(102, 126, 234, 0.1);
+      border: 1px solid rgba(255, 255, 255, 0.08);
+      position: relative;
+      overflow: hidden;
+    }
+
+    [data-theme="light"] .header {
+      box-shadow:
+        0 30px 80px rgba(0, 0, 0, 0.1),
+        inset 0 1px 0 rgba(255, 255, 255, 0.5);
+      border: 1px solid rgba(255, 255, 255, 0.3);
+    }
+
+    .header::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: -100%;
+      width: 100%;
+      height: 100%;
+      background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.05), transparent);
+      animation: shimmer 4s infinite;
+    }
+
+    @keyframes shimmer {
+      0% {
+        left: -100%;
+      }
+      100% {
+        left: 100%;
+      }
+    }
+
+    .logo {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 20px;
+      font-size: 4em;
+      font-weight: 900;
+      background: linear-gradient(45deg, var(--primary-color), var(--secondary-color), var(--accent-color), var(--accent-secondary));
+      background-size: 300% 300%;
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+      margin-bottom: 20px;
+      animation: gradientShift 6s ease-in-out infinite;
+      text-shadow: 0 0 30px rgba(102, 126, 234, 0.5);
+      transition: background 0.3s ease;
+    }
+
+    @keyframes gradientShift {
+      0%, 100% {
+        background-position: 0% 50%;
+      }
+      50% {
+        background-position: 100% 50%;
+      }
+    }
+
+    .logo img {
+      width: 80px;
+      height: 80px;
+      filter: drop-shadow(0 0 20px rgba(102, 126, 234, 0.5));
+      animation: pulse 3s ease-in-out infinite;
+    }
+
+    @keyframes pulse {
+      0%, 100% {
+        transform: scale(1);
+      }
+      50% {
+        transform: scale(1.05);
+      }
+    }
+
+    .tagline {
+      font-size: 1.4em;
+      color: #e0e0e0;
+      margin-bottom: 30px;
+      text-align: center;
+      opacity: 0.9;
+      text-shadow: 0 2px 10px rgba(0, 0, 0, 0.5);
+    }
+
+    .nav-links {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 20px;
+      margin-bottom: 30px;
+      justify-content: center;
+    }
+
+    .nav-link {
+      background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
+      color: white;
+      padding: 15px 25px;
+      border-radius: 50px;
+      text-decoration: none;
+      font-weight: 600;
+      font-size: 1.1em;
+      transition: all 0.3s ease;
+      box-shadow:
+        0 8px 25px rgba(102, 126, 234, 0.3),
+        inset 0 1px 0 rgba(255, 255, 255, 0.2);
+      position: relative;
+      overflow: hidden;
+    }
+
+    .nav-link::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: -100%;
+      width: 100%;
+      height: 100%;
+      background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.2), transparent);
+      transition: left 0.5s;
+    }
+
+    .nav-link:hover::before {
+      left: 100%;
+    }
+
+    .nav-link:hover {
+      transform: translateY(-3px);
+      box-shadow:
+        0 15px 30px rgba(102, 126, 234, 0.4),
+        0 0 20px rgba(102, 126, 234, 0.3);
+      background: linear-gradient(135deg, var(--secondary-color), var(--primary-color));
+    }
+
+    .description {
+      background: rgba(255, 255, 255, 0.05);
+      padding: 25px;
+      border-radius: 20px;
+      border: 1px solid rgba(102, 126, 234, 0.3);
+      color: #ffffff;
+      text-align: center;
+      font-size: 1.1em;
+      box-shadow:
+        0 10px 30px rgba(0, 0, 0, 0.2),
+        inset 0 1px 0 rgba(255, 255, 255, 0.1);
+    }
+
+    .main-content {
+      background: rgba(255, 255, 255, 0.05);
+      border-radius: 25px;
+      padding: 50px;
+      box-shadow:
+        0 30px 80px rgba(0, 0, 0, 0.4),
+        inset 0 1px 0 rgba(255, 255, 255, 0.1);
+      border: 1px solid rgba(255, 255, 255, 0.08);
+      position: relative;
+      overflow: hidden;
+    }
+
+    .main-content::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      height: 2px;
+      background: linear-gradient(90deg, var(--primary-color), var(--secondary-color), var(--accent-color));
+      background-size: 300% 100%;
+      animation: gradientMove 4s linear infinite;
+      transition: background 0.3s ease;
+    }
+
+    [data-theme="light"] .main-content::before {
+      background: linear-gradient(90deg, var(--text-primary), var(--text-primary), var(--text-primary));
+    }
+
+    @keyframes gradientMove {
+      0% {
+        background-position: 0% 0%;
+      }
+      100% {
+        background-position: 300% 0%;
+      }
+    }
+
+    .section-title {
+      font-size: 3.5em;
+      color: #ffffff;
+      margin-bottom: 40px;
+      text-align: center;
+      position: relative;
+      font-weight: 800;
+      background: linear-gradient(45deg, #ffffff, var(--primary-color));
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+      transition: background 0.3s ease;
+    }
+
+    .section-title::after {
+      content: '';
+      position: absolute;
+      bottom: -15px;
+      left: 50%;
+      transform: translateX(-50%);
+      width: 150px;
+      height: 4px;
+      background: linear-gradient(45deg, var(--primary-color), var(--secondary-color));
+      border-radius: 2px;
+      box-shadow: 0 2px 10px rgba(102, 126, 234, 0.3);
+      transition: background 0.3s ease;
+    }
+
+    .blog-posts {
+      display: grid;
+      gap: 30px;
+    }
+
+    .blog-post {
+      background: rgba(255, 255, 255, 0.05);
+      border-radius: 20px;
+      padding: 30px;
+      border-left: 6px solid var(--primary-color);
+      transition: all 0.3s ease;
+      cursor: pointer;
+      box-shadow:
+        0 10px 30px rgba(0, 0, 0, 0.2),
+        inset 0 1px 0 rgba(255, 255, 255, 0.1);
+      position: relative;
+      overflow: hidden;
+    }
+
+    [data-theme="light"] .blog-post {
+      box-shadow:
+        0 10px 30px rgba(0, 0, 0, 0.08),
+        inset 0 1px 0 rgba(255, 255, 255, 0.8);
+    }
+
+    .blog-post::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 0;
+      height: 100%;
+      background: linear-gradient(90deg, rgba(102, 126, 234, 0.05), rgba(118, 75, 162, 0.05));
+      transition: width 0.4s ease;
+      z-index: 0;
+    }
+
+    .blog-post:hover::before {
+      width: 100%;
+    }
+
+    .blog-post:hover {
+      transform: translateY(-5px);
+      box-shadow:
+        0 20px 40px rgba(0, 0, 0, 0.3),
+        0 0 30px rgba(102, 126, 234, 0.2);
+      border-left-color: var(--secondary-color);
+    }
+
+    [data-theme="light"] .blog-post:hover {
+      transform: translateY(-10px) scale(1.02);
+      box-shadow:
+        0 25px 50px rgba(0, 0, 0, 0.15),
+        0 0 30px rgba(102, 126, 234, 0.2);
+    }
+
+    .blog-post>* {
+      position: relative;
+      z-index: 1;
+    }
+
+    .post-title {
+      font-size: 1.6em;
+      font-weight: 700;
+      color: #ffffff;
+      margin-bottom: 10px;
+      display: flex;
+      align-items: center;
+      flex-wrap: wrap;
+      gap: 10px;
+    }
+
+    .post-date {
+      color: #cccccc;
+      font-size: 0.95em;
+      margin-bottom: 18px;
+      font-weight: 500;
+      opacity: 0.8;
+    }
+
+    .post-excerpt {
+      color: #e0e0e0;
+      line-height: 1.8;
+      font-size: 1.05em;
+    }
+
+    .version-badge {
+      display: inline-block;
+      background: linear-gradient(45deg, var(--primary-color), var(--secondary-color));
+      color: white;
+      padding: 6px 15px;
+      border-radius: 25px;
+      font-size: 0.8em;
+      font-weight: 700;
+      box-shadow: 0 4px 15px rgba(102, 126, 234, 0.3);
+      animation: glow 3s ease-in-out infinite alternate;
+      transition: background 0.3s ease;
+    }
+
+    [data-theme="light"] .version-badge {
+      background: var(--text-primary);
+    }
+
+    @keyframes glow {
+      from {
+        box-shadow: 0 4px 15px rgba(102, 126, 234, 0.3);
+      }
+      to {
+        box-shadow: 0 4px 20px rgba(102, 126, 234, 0.5);
+      }
+    }
+
+    .highlight {
+      background: linear-gradient(120deg, rgba(102, 126, 234, 0.15) 0%, rgba(118, 75, 162, 0.15) 100%);
+      padding: 4px 10px;
+      border-radius: 6px;
+      font-weight: 600;
+      color: var(--primary-color);
+      box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.3);
+      transition: color 0.3s ease;
+    }
+
+    @media (max-width: 768px) {
+      .container {
+        padding: 15px;
+      }
+
+      .header {
+        padding: 25px;
+      }
+
+      .logo {
+        font-size: 2.8em;
+      }
+
+      .nav-links {
+        justify-content: center;
+      }
+
+      .main-content {
+        padding: 30px;
+      }
+
+      .section-title {
+        font-size: 2.5em;
+      }
+
+      .nav-link {
+        padding: 12px 20px;
+        font-size: 1em;
+      }
+
+    }
+
+    .fade-in {
+      animation: fadeInUp 1s ease-out forwards;
+    }
+
+    @keyframes fadeInUp {
+      from {
+        opacity: 0;
+        transform: translateY(30px);
+      }
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    /* Scrollbar styling */
+    ::-webkit-scrollbar {
+      width: 8px;
+    }
+
+    ::-webkit-scrollbar-track {
+      background: rgba(0, 0, 0, 0.1);
+    }
+
+    ::-webkit-scrollbar-thumb {
+      background: linear-gradient(45deg, var(--primary-color), var(--secondary-color));
+      border-radius: 4px;
+      transition: background 0.3s ease;
+    }
+
+    ::-webkit-scrollbar-thumb:hover {
+      background: linear-gradient(45deg, var(--secondary-color), var(--primary-color));
+    }
+
+    /* Performance optimization */
+    .orb,
+    .header::before,
+    body::before {
+      transform: translateZ(0);
+      backface-visibility: hidden;
+    }
+  </style>
+</head>
+
+<body data-theme="light">
+  <div class="container">
+<header class="header fade-in">
+     <h1>
+	</h1>
+    
+<div class="description" style="display: flex; max-width: 1280px; margin: 0 auto; gap: 20px; align-items: center;">
+  <div style="flex: 1; max-width: 640px; display: flex; flex-direction: column; justify-content: center;">
+    <h1 class="logo">
+      <a class="navbar-brand" href="/">
+        <img src="https://wayfire.org/assets/logo.png" alt="Wayfire Logo">
+        Wayfire
+      </a>
     </h1>
     <p>
-      Wayfire is a wayland compositor based on
-      <a href="https://gitlab.freedesktop.org/wlroots/wlroots">wlroots</a>.
+    Wayfire is a wayland compositor based on
+    <span class="highlight"><a href="https://gitlab.freedesktop.org/wlroots/wlroots">wlroots</a></span>
       It aims to create a customizable, extendable and lightweight environment
       without sacrificing its appearance.
     </p>
   </div>
-  <div class="col-md-8">
+  <div style="flex: 1; max-width: 640px;">
     <iframe
       width="640"
       height="440"
@@ -26,10 +618,165 @@ layout: master
     ></iframe>
   </div>
 </div>
-<div class="row" style="margin-top: 2rem">
-  <div class="col-md-8 offset-md-2">
-    {% for post in site.posts %}
-    {% include post-stub.html post=post %}
-    {% endfor %}
+
+
+    <main class="main-content fade-in">
+      <h2 class="section-title">Latest Announcements</h2>
+
+      <div class="blog-posts">
+        <article class="blog-post fade-in" onclick="window.location.href='/2024/08/23/Wayfire-0-9.html'">
+          <h3 class="post-title">
+            Wayfire 0.9.0 announcement
+            <span class="version-badge">v0.9.0</span>
+          </h3>
+          <p class="post-date">August 23, 2024</p>
+          <p class="post-excerpt">
+            Hello everyone! I am happy to announce the release of Wayfire 0.9.0. In the (relatively) long time since the
+            last announcement, the focus has been on continually improving the
+            <span class="highlight">stability of Wayfire</span> and its plugins after the big API refactor which was
+            finished last year. Nonetheless, there are still many cool additions in this latest release. In the
+            following I will attempt a summary of the important changes and will go into more detail on one of Wayfire's
+            newest and most powerful features: the <span class="highlight">IPC socket</span>.
+          </p>
+        </article>
+
+        <article class="blog-post fade-in" onclick="window.location.href='/2023/10/07/Wayfire-0-8.html'">
+          <h3 class="post-title">
+            Wayfire 0.8.0 announcement
+            <span class="version-badge">v0.8.0</span>
+          </h3>
+          <p class="post-date">October 7, 2023</p>
+          <p class="post-excerpt">
+            Hello everyone! It has been nearly three years since I last wrote to this blog. Fortunately, that does not
+            mean Wayfire's development has stopped! Quite the opposite, in fact I am happy to announce the release of
+            Wayfire 0.8.0. There have been many changes and <span class="highlight">plugin API breakages</span> since
+            the Wayfire 0.7.x series, so I will try to summarize the important changes in the following paragraphs.
+          </p>
+        </article>
+
+        <article class="blog-post fade-in" onclick="window.location.href='/2021/01/29/Wayfire-0-7.html'">
+          <h3 class="post-title">
+            Wayfire 0.7.0 announcement
+            <span class="version-badge">v0.7.0</span>
+          </h3>
+          <p class="post-date">January 29, 2021</p>
+          <p class="post-excerpt">
+            Hello everyone! Today is the day that Wayfire 0.7.0 was released. There have been quite a few exciting
+            changes since the last time I wrote here. Check all the new features and (unfortunately) the few
+            <span class="highlight">breaking changes</span> below.
+          </p>
+        </article>
+
+        <article class="blog-post fade-in" onclick="window.location.href='/2020/10/28/Writing-Plugins.html'">
+          <h3 class="post-title">Writing Wayfire plugins (Part 2)</h3>
+          <p class="post-date">October 28, 2020</p>
+          <p class="post-excerpt">
+            Hello everyone, this is the next blog in the series about writing Wayfire plugins. Again, I will be writing
+            a custom plugin and explaining the steps along the way. This time however the focus will be on the
+            <span class="highlight">rendering parts</span> of Wayfire.
+          </p>
+        </article>
+
+        <article class="blog-post fade-in" onclick="window.location.href='/2020/08/04/Wayfire-0-5.html'">
+          <h3 class="post-title">
+            Wayfire 0.5.0 announcement
+            <span class="version-badge">v0.5.0</span>
+          </h3>
+          <p class="post-date">August 4, 2020</p>
+          <p class="post-excerpt">
+            I am pleased to announce the release of Wayfire 0.5.0. There have been
+            <span class="highlight">247 commits</span> since the last release. Here are some highlights of the new
+            features and improvements.
+          </p>
+        </article>
+
+        <article class="blog-post fade-in" onclick="window.location.href='/2020/04/10/Writing-Plugins.html'">
+          <h3 class="post-title">Writing Wayfire plugins (Part 1)</h3>
+          <p class="post-date">April 10, 2020</p>
+          <p class="post-excerpt">
+            If someone were to ask me what is the greatest aspect of Wayfire, then this would undoubtedly be its
+            <span class="highlight">customizability and modularity</span>. There are a ton of options you can tweak to
+            your liking. However, options are rarely enough if you want to make your desktop truly your own. And this is
+            why Wayfire uses a <span class="highlight">plugin architecture</span>.
+          </p>
+        </article>
+
+        <article class="blog-post fade-in" onclick="window.location.href='/2020/03/21/Wayfire-0-4.html'">
+          <h3 class="post-title">
+            Wayfire 0.4.0 is here!
+            <span class="version-badge">v0.4.0</span>
+          </h3>
+          <p class="post-date">March 21, 2020</p>
+          <p class="post-excerpt">
+            I am pleased to announce the next release of Wayfire. As usual, there has been a lot of work and many
+            <span class="highlight">bug fixes</span>. Here is a summary of the important changes.
+          </p>
+        </article>
+
+        <article class="blog-post fade-in" onclick="window.location.href='/2019/10/07/Wayfire-0-3.html'">
+          <h3 class="post-title">
+            Wayfire 0.3
+            <span class="version-badge">v0.3</span>
+          </h3>
+          <p class="post-date">October 7, 2019</p>
+          <p class="post-excerpt">
+            It has been a relatively long time since the last time I have written in this blog. That doesn't mean work
+            on Wayfire has stopped! In fact, I'm happy to announce the release of Wayfire 0.3. There are quite a few
+            <span class="highlight">improvements</span>, which I'd like to share.
+          </p>
+        </article>
+
+        <article class="blog-post fade-in" onclick="window.location.href='/2019/02/24/X11-WLC-Libweston-Wlroots.html'">
+          <h3 class="post-title">X11 → WLC → libweston → wlroots: how the current Wayfire came to be</h3>
+          <p class="post-date">February 24, 2019</p>
+          <p class="post-excerpt">
+            Wayfire is a project which has had <span class="highlight">4 versions</span> and has been
+            <span class="highlight">rewritten 3 times</span>. In this blog post I'll try to outline why those rewrites
+            were necessary.
+          </p>
+        </article>
+
+        <article class="blog-post fade-in" onclick="window.location.href='/2019/01/13/Introduction-to-Wayfire.html'">
+          <h3 class="post-title">Introduction to Wayfire</h3>
+          <p class="post-date">January 13, 2019</p>
+          <p class="post-excerpt">
+            Hello all, I've recently been spending a lot of time developing Wayfire, so with the help of Drew DeVault (a
+            huge thanks for setting up the blog) I decided to start telling more about it.
+          </p>
+        </article>
+      </div>
+    </main>
   </div>
-</div>
+
+  <script>
+    function togglePost(element) {
+      element.style.transform = element.style.transform.includes('translateY(-3px)') ? 'translateY(-5px)' : 'translateY(-3px)';
+      setTimeout(() => {
+        element.style.transform = 'translateY(-5px)';
+      }, 100);
+    }
+
+
+    // Simplified animations
+    document.addEventListener('DOMContentLoaded', function() {
+      const posts = document.querySelectorAll('.blog-post');
+      posts.forEach((post, index) => {
+        post.style.animationDelay = `${index * 0.05 + 0.3}s`;
+        post.classList.add('fade-in');
+      });
+    });
+
+    // Simplified hover effects
+    document.querySelectorAll('.nav-link').forEach(link => {
+      link.addEventListener('mouseenter', function() {
+        this.style.background = 'linear-gradient(135deg, var(--secondary-color), var(--primary-color))';
+      });
+      
+      link.addEventListener('mouseleave', function() {
+        this.style.background = 'linear-gradient(135deg, var(--primary-color), var(--secondary-color))';
+      });
+    });
+  </script>
+</body>
+
+</html>
