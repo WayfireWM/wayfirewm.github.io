@@ -1,62 +1,67 @@
-<!DOCTYPE html> <html lang="en"> <head> <meta charset="UTF-8"> <meta name="viewport" content="width=device-width, initial-scale=1.0"> <link rel="icon" type="image/png" href="/assets/logo.png" /> <link rel="alternate" type="application/rss+xml" href="http://localhost:4000/feed.xml" title=
-<!doctype html>
-<html>
-  <head>
-    <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <link rel="stylesheet" href="/css/master.css" />
-    <link rel="stylesheet" href="/assets/theme/theme.css" />
-    <link rel="icon" type="image/png" href="/assets/logo.png" />
-    <link rel="alternate" type="application/rss+xml"  href="{{ site.url }}/feed.xml" title="{{ site.title }}">
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet"> <!--master.scss add back @import "bootstrap/scss/bootstrap"; -->
-    <title>{{ page.title }}</title>
-  </head>
-  <body>
-    <div class="container">
-      <nav class="navbar navbar-light navbar-expand-sm">
-        <h1 class="logo">
-		<a class="navbar-brand" href="/">
-        <img src="https://wayfire.org/assets/logo.png" alt="Wayfire Logo">
-        Wayfire
-		</a>
-      </h1>
-        <nav class="nav-links">
-        <a href="https://github.com/WayfireWM/wayfire/releases" class="nav-link">🚀 Releases</a>
-        <a href="https://github.com/WayfireWM/wayfire" class="nav-link">💻 Source Code</a>
-        <a href="https://github.com/WayfireWM/wayfire/wiki" class="nav-link">📚 Wiki</a>
-        <a href="https://web.libera.chat/#wayfire" class="nav-link">💬 IRC Chat</a>
-        <a href="https://matrix.to/#/#wayfire:matrix.org" class="nav-link">🔗 Matrix</a>
-        <a href="https://discord.gg/5SWAxmBCUH" class="nav-link">🎮 Discord</a>
-      </nav>
-      </nav>
-      <div class="main">
-        {{ content }}
-      </div>
-    </div>
-  </body>
-</html>
+<!DOCTYPE html>
 <html lang="en">
+
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <link rel="icon" type="image/png" href="/assets/logo.png" />
-    <link rel="alternate" type="application/rss+xml"  href="http://localhost:4000/feed.xml" title="">
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet"> <!--master.scss add back @import "bootstrap/scss/bootstrap"; -->
+  <link rel="alternate" type="application/rss+xml" href="http://localhost:4000/feed.xml" title="">
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
   <title>Wayfire - Wayland Compositor</title>
   <style>
+  :root {
+      --primary-color: #667eea;
+      --secondary-color: #764ba2;
+      --accent-color: #f093fb;
+      --accent-secondary: #f5576c;
+      --background-gradient: linear-gradient(135deg, #0c0c0c 0%, #1a1a2e 25%, #16213e 50%, #0f3460 75%, #533483 100%);
+    }
+
+    [data-theme="ocean"] {
+      --primary-color: #4facfe;
+      --secondary-color: #00f2fe;
+      --accent-color: #43e97b;
+      --accent-secondary: #38f9d7;
+      --background-gradient: linear-gradient(135deg, #0c1419 0%, #1a2e3a 25%, #16273e 50%, #0f4660 75%, #345383 100%);
+    }
+
+    [data-theme="sunset"] {
+      --primary-color: #ff9a9e;
+      --secondary-color: #fecfef;
+      --accent-color: #ffa726;
+      --accent-secondary: #ff7043;
+      --background-gradient: linear-gradient(135deg, #1a0c0c 0%, #2e1a1a 25%, #3e1616 50%, #601b0f 75%, #833453 100%);
+    }
+
+    [data-theme="forest"] {
+      --primary-color: #56ab2f;
+      --secondary-color: #a8e6cf;
+      --accent-color: #88d8a3;
+      --accent-secondary: #4fd3c4;
+      --background-gradient: linear-gradient(135deg, #0c190c 0%, #1a2e1a 25%, #16381e 50%, #0f6034 75%, #348356 100%);
+    }
+
+    [data-theme="cosmic"] {
+      --primary-color: #ffffff;
+      --secondary-color: #cccccc;
+      --accent-color: #888888;
+      --accent-secondary: #666666;
+      --background-gradient: linear-gradient(135deg, #000000 0%, #1a1a1a 25%, #2d2d2d 50%, #404040 75%, #595959 100%);
+    }
+
     [data-theme="light"] {
       --primary-color: #ff5e62;
       --secondary-color: #ff8c50;
       --accent-color: #667eea;
       --accent-secondary: #764ba2;
       --background-gradient: #fff;
-      --text-primary: #000000;
+      --text-primary: #353535;
       --text-secondary: #666;
       --text-light: #353535;
       --card-bg: rgba(255, 255, 255, 0.9);
       --header-bg: rgba(255, 255, 255, 0.03);
       --description-bg: #e7e7e7;
-      --main-content-bg: --description-bg;
+      --main-content-bg: #FFFFFF;
       --border-color: rgba(255, 255, 255, 0.3);
     }
 
@@ -127,7 +132,7 @@
     }
 
     [data-theme="light"] .header {
-      background: var(--header-bg, rgba(255, 255, 255, 0.03));
+      background: rgba(0, 0, 0, 1.0);
     }
 
     [data-theme="light"] .logo {
@@ -145,6 +150,209 @@
       background: none;
     }
 
+    [data-theme="light"] {
+      --primary-color: #1E3A8A; /* Deep blue for elegance */
+      --secondary-color: #3B82F6; /* Lighter blue for hover effects */
+      --accent-color: #6B7280; /* Neutral gray for subtle accents */
+      --accent-secondary: #9CA3AF; /* Light gray for secondary accents */
+      --background-gradient: #F9FAFB; /* Off-white for a clean, elegant background */
+      --text-primary: #1F2937; /* Near-black for readable text */
+      --text-secondary: #4B5563; /* Dark gray for secondary text */
+      --text-light: #6B7280; /* Lighter gray for subtle text */
+      --card-bg: rgba(255, 255, 255, 0.95); /* Slightly opaque white for cards */
+      --header-bg: rgba(255, 255, 255, 0.8); /* Semi-transparent white for header */
+      --description-bg: #E5E7EB; /* Light gray for description background */
+      --main-content-bg: #FFFFFF; /* Pure white for main content */
+      --border-color: rgba(209, 213, 219, 0.5); /* Light gray border for elegance */
+    }
+
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    /* Replace your existing body CSS with this updated version */
+
+body {
+  font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+  line-height: 1.6;
+  color: #ffffff;
+  background: var(--background-gradient);
+  /* Remove background-attachment: fixed - this is causing the issue */
+  min-height: 100vh;
+  overflow-x: hidden;
+  position: relative;
+  transition: background 0.3s ease;
+}
+
+/* Alternative approach: Use a pseudo-element for a truly fixed background */
+body::after {
+  content: '';
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: var(--background-gradient);
+  z-index: -3; /* Behind everything including the ::before element */
+  pointer-events: none;
+}
+
+/* Update the existing ::before element z-index to be above the new ::after */
+body::before {
+  content: '';
+  position: fixed;
+  top: -10%;
+  left: -10%;
+  width: 120%;
+  height: 120%;
+  background: 
+    radial-gradient(ellipse at 20% 20%, rgba(120, 119, 198, 0.1) 0%, transparent 50%),
+    radial-gradient(ellipse at 80% 80%, rgba(255, 118, 117, 0.1) 0%, transparent 50%),
+    radial-gradient(ellipse at 50% 50%, rgba(29, 78, 216, 0.08) 0%, transparent 60%);
+  z-index: -2; /* Above the gradient but below content */
+}
+
+/* Light theme override for the new pseudo-element */
+[data-theme="light"] body::after {
+  background: #F9FAFB; /* Match the light theme background */
+}
+
+[data-theme="light"] body::before {
+  background: none;
+}
+
+    [data-theme="light"] body {
+      color: var(--text-primary, #353535);
+    }
+
+    [data-theme="light"] .tagline {
+      color: var(--text-primary, #353535);
+    }
+
+    [data-theme="light"] .description {
+      background: var(--description-bg, #e7e7e7);
+      color: var(--text-primary, #353535);
+    }
+
+    [data-theme="light"] .main-content {
+      background: var(--main-content-bg, #353535);
+      color: #ffffff;
+    }
+
+    [data-theme="light"] .section-title {
+      color: #333;
+      background: var(--text-primary, #353535);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+    }
+
+    [data-theme="light"] .post-title {
+      color: var(--text-primary, #353535);
+    }
+
+    [data-theme="light"] .post-date {
+      color: var(--text-secondary, #666);
+    }
+
+    [data-theme="light"] .post-excerpt {
+      color: var(--text-primary, #353535);
+    }
+
+    [data-theme="light"] .blog-post {
+      background: var(--card-bg, rgba(255, 255, 255, 0.9));
+      border-left-color: var(--primary-color);
+    }
+
+    [data-theme="light"] .blog-post:hover {
+      border-left-color: var(--secondary-color);
+    }
+
+    [data-theme="light"] .header {
+      background: rgba(0, 0, 0, 1.0);
+    }
+
+    [data-theme="light"] .logo {
+      background: var(--text-primary, #353535);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+    }
+
+    [data-theme="light"] .section-title::after {
+      background: linear-gradient(45deg, #fff, #fff);
+    }
+
+    .theme-selector {
+      position: fixed;
+      top: 20px;
+      right: 20px;
+      z-index: 1000;
+    }
+
+    .theme-dropdown {
+      background: rgba(255, 255, 255, 0.1);
+      border: 1px solid rgba(255, 255, 255, 0.2);
+      border-radius: 15px;
+      padding: 10px 15px;
+      color: white;
+      font-size: 14px;
+      font-weight: 600;
+      cursor: pointer;
+      backdrop-filter: blur(10px);
+      box-shadow: 0 8px 25px rgba(0, 0, 0, 0.3);
+      transition: all 0.3s ease;
+    }
+
+    [data-theme="light"] .theme-dropdown {
+      background: rgba(0, 0, 0, 0.1);
+      border: 1px solid rgba(0, 0, 0, 0.2);
+      color: #353535;
+      box-shadow: 0 8px 25px rgba(0, 0, 0, 0.1);
+    }
+
+    .theme-dropdown:hover {
+      background: rgba(255, 255, 255, 0.15);
+      transform: translateY(-2px);
+      box-shadow: 0 12px 35px rgba(0, 0, 0, 0.4);
+    }
+
+    [data-theme="light"] .theme-dropdown:hover {
+      background: rgba(0, 0, 0, 0.15);
+      box-shadow: 0 12px 35px rgba(0, 0, 0, 0.2);
+    }
+
+    .theme-dropdown option {
+      background: #1a1a2e;
+      color: white;
+      padding: 10px;
+    }
+
+    [data-theme="light"] .theme-dropdown option {
+      background: #ffffff;
+      color: #353535;
+    }
+
+    body::before {
+      content: '';
+      position: fixed;
+      top: -10%;
+      left: -10%;
+      width: 120%;
+      height: 120%;
+      background: 
+        radial-gradient(ellipse at 20% 20%, rgba(120, 119, 198, 0.1) 0%, transparent 50%),
+        radial-gradient(ellipse at 80% 80%, rgba(255, 118, 117, 0.1) 0%, transparent 50%),
+        radial-gradient(ellipse at 50% 50%, rgba(29, 78, 216, 0.08) 0%, transparent 60%);
+      z-index: -2;
+    }
+
+    [data-theme="light"] body::before {
+      background: none;
+    }
+
     @keyframes subtleFloat {
       0%, 100% {
         transform: scale(1) rotate(0deg);
@@ -152,21 +360,41 @@
       50% {
         transform: scale(1.1) rotate(1deg);
       }
-    }   
+    }
 
+
+    [data-theme="light"] .orb {
+      opacity: 0.1;
+    }
+
+ 
+
+    @keyframes slowOrbit {
+      0% {
+        transform: rotate(0deg) translateX(30px) rotate(0deg);
+      }
+      100% {
+        transform: rotate(360deg) translateX(30px) rotate(-360deg);
+      }
+    }
+
+.main {
+  margin-top: 100px; /* Add space at the start of main content */
+}
     .container {
       max-width: 1400px;
       margin: 0 auto;
       padding: 20px;
+      padding-top: 80px; /* Adjusted to prevent overlap with fixed nav-links */
       position: relative;
       z-index: 1;
     }
 
     .header {
-      background: rgba(255, 255, 255, 0.03);
+      background: rgba(0, 0, 0, 1.0);
       border-radius: 25px;
       padding: 40px;
-      margin-bottom: 10px;
+      margin-bottom: 40px;
       box-shadow:
         0 30px 80px rgba(0, 0, 0, 0.4),
         inset 0 1px 0 rgba(255, 255, 255, 0.1),
@@ -178,7 +406,7 @@
 
     [data-theme="light"] .header {
       box-shadow:
-        0 30px 80px rgba(0, 0, 0, 0.1),
+        0 30px 80px rgba(0, 0, 0, 1.0),
         inset 0 1px 0 rgba(255, 255, 255, 0.5);
       border: 1px solid rgba(255, 255, 255, 0.3);
     }
@@ -203,24 +431,6 @@
       }
     }
 
-    .logo {
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      gap: 20px;
-      font-size: 4em;
-      font-weight: 900;
-      background: linear-gradient(45deg, var(--primary-color), var(--secondary-color), var(--accent-color), var(--accent-secondary));
-      background-size: 300% 300%;
-      -webkit-background-clip: text;
-      -webkit-text-fill-color: transparent;
-      background-clip: text;
-      margin-bottom: 20px;
-      animation: gradientShift 6s ease-in-out infinite;
-      text-shadow: 0 0 30px rgba(102, 126, 234, 0.5);
-      transition: background 0.3s ease;
-    }
-
     @keyframes gradientShift {
       0%, 100% {
         background-position: 0% 50%;
@@ -231,9 +441,8 @@
     }
 
     .logo img {
-      width: 80px;
-      height: 80px;
-      filter: drop-shadow(0 0 20px rgba(102, 126, 234, 0.5));
+      width: 50px;
+      height: 50px;
       animation: pulse 3s ease-in-out infinite;
     }
 
@@ -255,70 +464,14 @@
       text-shadow: 0 2px 10px rgba(0, 0, 0, 0.5);
     }
 
-    .nav-links {
-      display: flex;
-      justify-content: center;
-      gap: 10px;
-      flex-wrap: wrap;
-      margin: 0;
-      padding: 0;
-    }
-
-/* Remove padding and margins from navbar and nav-links */
-    .navbar {
-      padding: 0;
-      margin-bottom: 0;
-    }
-
-    .nav-links {
-      margin-bottom: 0;
-    }
-
-    .nav-link {
-      background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
-      color: white;
-      padding: 15px 25px;
-      border-radius: 50px;
-      text-decoration: none;
-      font-weight: 600;
-      font-size: 1.1em;
-      transition: all 0.3s ease;
-      box-shadow:
-        0 8px 25px rgba(102, 126, 234, 0.3),
-        inset 0 1px 0 rgba(255, 255, 255, 0.2);
-      position: relative;
-      overflow: hidden;
-    }
-
-    .nav-link::before {
-      content: '';
-      position: absolute;
-      top: 0;
-      left: -100%;
-      width: 100%;
-      height: 100%;
-      background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.2), transparent);
-      transition: left 0.5s;
-    }
-
-    .nav-link:hover::before {
-      left: 100%;
-    }
-
-    .nav-link:hover {
-      transform: translateY(-3px);
-      box-shadow:
-        0 15px 30px rgba(102, 126, 234, 0.4),
-        0 0 20px rgba(102, 126, 234, 0.3);
-      background: linear-gradient(135deg, var(--secondary-color), var(--primary-color));
-    }
+    
 
     .description {
       background: rgba(255, 255, 255, 0.05);
       padding: 25px;
       border-radius: 20px;
       border: 1px solid rgba(102, 126, 234, 0.3);
-      color: #ffffff;
+      color: #000000;
       text-align: center;
       font-size: 1.1em;
       box-shadow:
@@ -505,18 +658,19 @@
     }
 
     .highlight {
-      background: rgba(0, 0, 0, 0.0);
+      background: linear-gradient(120deg, rgba(102, 126, 234, 0.15) 0%, rgba(118, 75, 162, 0.15) 100%);
       padding: 4px 10px;
       border-radius: 6px;
       font-weight: 600;
       color: var(--primary-color);
-      box-shadow: inset 1px 1px 1px 1px rgba(55, 55, 55, 0.3);
+      box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.3);
       transition: color 0.3s ease;
     }
 
     @media (max-width: 768px) {
       .container {
         padding: 15px;
+        padding-top: 120px; /* Increased for mobile to account for nav-links */
       }
 
       .header {
@@ -527,10 +681,6 @@
         font-size: 2.8em;
       }
 
-      .nav-links {
-        justify-content: center;
-      }
-
       .main-content {
         padding: 30px;
       }
@@ -538,13 +688,6 @@
       .section-title {
         font-size: 2.5em;
       }
-
-      .nav-link {
-        padding: 12px 20px;
-        font-size: 1em;
-      }
-
-     
 
       .theme-selector {
         top: 10px;
@@ -572,7 +715,6 @@
       }
     }
 
-    /* Scrollbar styling */
     ::-webkit-scrollbar {
       width: 8px;
     }
@@ -591,16 +733,213 @@
       background: linear-gradient(45deg, var(--secondary-color), var(--primary-color));
     }
 
-    /* Performance optimization */
+    .orb,
     .header::before,
     body::before {
       transform: translateZ(0);
       backface-visibility: hidden;
     }
+	
+
+
+/* Resize the logo to fit within the nav height */
+.logo {
+  display: flex;
+  align-items: center;
+  margin: 0;
+  padding: 0 10px;
+}
+
+.logo img {
+  max-height: 50%; /* Scale logo to fit within nav height (adjust as needed) */
+  width: auto; /* Maintain aspect ratio */
+}
+
+
+	.nav-links {
+  pointer-events: auto;
+}
+
+.nav-links:hover {
+  background: none !important;
+  border: 1px solid rgba(255, 255, 255, 0.2) !important;
+}
+
+	.nav-links {
+	background: rgba(255, 255, 255, 0.0);
+      border: 1px solid rgba(255, 255, 255, 0.2);
+      border-radius: 15px;
+      padding: 10px 15px;
+     
+      font-size: 14px;
+      font-weight: 600;
+      cursor: pointer;
+      backdrop-filter: blur(10px);
+      transition: all 0.3s ease;
+	
+	padding: 10px 15px;
+      position: fixed;
+      top: 20px;
+      left: 20px; /* Positioned to the left of the theme selector */
+	  padding: 5px 5px;
+      display: flex;
+      gap: 10px;
+      justify-content: center;
+	  align-items: center;
+      z-index: 1000;
+    }
+
+
+/* Add this CSS to fix the white hover effect */
+.nav-link {
+  color: white;
+  text-decoration: none;
+  padding: 8px 12px;
+  border-radius: 10px;
+  transition: all 0.3s ease;
+  background: rgba(255, 255, 255, 0.0) !important;
+}
+
+.nav-link:hover {
+  background: rgba(255, 255, 255, 0.1) !important;
+  color: white !important;
+  text-decoration: none !important;
+  transform: translateY(-2px);
+}
+
+/* Fix all link states to prevent white background */
+.nav-link:visited,
+.nav-link:focus,
+.nav-link:active {
+  background: rgba(255, 255, 255, 0.0) !important;
+  color: white !important;
+  text-decoration: none !important;
+  outline: none !important;
+}
+
+/* For light theme */
+[data-theme="light"] .nav-link {
+  color: #353535;
+  background: rgba(0, 0, 0, 0.0) !important;
+}
+
+[data-theme="light"] .nav-link:hover {
+  background: rgba(0, 0, 0, 0.1) !important;
+  color: #353535 !important;
+}
+
+[data-theme="light"] .nav-link:visited,
+[data-theme="light"] .nav-link:focus,
+[data-theme="light"] .nav-link:active {
+  background: rgba(0, 0, 0, 0.0) !important;
+  color: #353535 !important;
+  text-decoration: none !important;
+  outline: none !important;
+}
+    
+
+/* Optional: Ensure responsiveness for smaller screens */
+@media (max-width: 768px) {
+  .nav-link {
+    font-size: 0.8em; /* Further reduce font size on smaller screens */
+  }
+  .logo img {
+    max-height: 70%; /* Adjust logo size for smaller screens */
+  }
   </style>
 </head>
+
+
+
+
+<!DOCTYPE html> <html lang="en"> <head> <meta charset="UTF-8"> <meta name="viewport" content="width=device-width, initial-scale=1.0"> <link rel="icon" type="image/png" href="/assets/logo.png" /> <link rel="alternate" type="application/rss+xml" href="http://localhost:4000/feed.xml" title=
+
+<!doctype html>
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="/css/master.css" />
+    <link rel="stylesheet" href="/assets/theme/theme.css" />
+    <link rel="icon" type="image/png" href="/assets/logo.png" />
+    <link rel="alternate" type="application/rss+xml"  href="{{ site.url }}/feed.xml" title="{{ site.title }}">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet"> <!--master.scss add back @import "bootstrap/scss/bootstrap"; -->
+    <title>{{ page.title }}</title>
+  </head>
   <body>
-    <body data-theme="light">
+  <body data-theme="light">
+  <div class="theme-selector">
+    <select class="theme-dropdown" id="themeSelector">
+	  <option value="light">☀️ Light Theme</option>
+      <option value="default">🎨 Purple Cosmic</option>
+      <option value="ocean">🌊 Ocean Blue</option>
+      <option value="sunset">🌅 Sunset Orange</option>
+      <option value="forest">🌲 Forest Green</option>
+      <option value="cosmic">🚀 Black/White</option>
+    </select>
+  </div>
+  
+  <nav class="nav-links">
+  <h1 class="logo">
+  <a class="navbar-brand" href="/">
+        <img src="https://wayfire.org/assets/logo.png" alt="Wayfire Logo">
+      </a>
+	  </h1>
+        <a href="https://github.com/WayfireWM/wayfire/releases" class="nav-link">🚀 Releases</a>
+        <a href="https://github.com/WayfireWM/wayfire" class="nav-link">💻 Source Code</a>
+        <a href="https://github.com/WayfireWM/wayfire/wiki" class="nav-link">📚 Wiki</a>
+        <a href="https://web.libera.chat/#wayfire" class="nav-link">💬 IRC Chat</a>
+        <a href="https://matrix.to/#/#wayfire:matrix.org" class="nav-link">🔗 Matrix</a>
+        <a href="https://discord.gg/5SWAxmBCUH" class="nav-link">🎮 Discord</a>
+      </nav>
+    <div class="container">
+      
+      <div class="main">
+        {{ content }}
+      </div>
     </div>
+	<script>
+    function togglePost(element) {
+      element.style.transform = element.style.transform.includes('translateY(-3px)') ? 'translateY(-5px)' : 'translateY(-3px)';
+      setTimeout(() => {
+        element.style.transform = 'translateY(-5px)';
+      }, 100);
+    }
+
+    const themeSelector = document.getElementById('themeSelector');
+    const body = document.body;
+
+    themeSelector.addEventListener('change', function() {
+      body.setAttribute('data-theme', this.value);
+    });
+
+    document.addEventListener('DOMContentLoaded', function() {
+      const posts = document.querySelectorAll('.blog-post');
+      posts.forEach((post, index) => {
+        post.style.animationDelay = `${index * 0.05 + 0.3}s`;
+        post.classList.add('fade-in');
+      });
+    });
+
+    document.querySelectorAll('.nav-link').forEach(link => {
+      link.addEventListener('mouseenter', function() {
+        this.style.background = 'rgba(255, 255, 255, 0.15)';
+      });
+      
+      link.addEventListener('mouseleave', function() {
+        this.style.background = 'rgba(255, 255, 255, 0.1)';
+      });
+
+      if (document.body.getAttribute('data-theme') === 'light') {
+        link.addEventListener('mouseenter', function() {
+          this.style.background = 'rgba(0, 0, 0, 0.15)';
+        });
+        
+        link.addEventListener('mouseleave', function() {
+          this.style.background = 'rgba(0, 0, 0, 0.1)';
+        });
+      }
+    });
+  </script>
   </body>
 </html>
