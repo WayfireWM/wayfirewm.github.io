@@ -211,7 +211,7 @@ layout: master
       }
     }
 
-    .logo {
+    .logo2 {
       display: flex;
       align-items: center;
       justify-content: center;
@@ -223,7 +223,19 @@ layout: master
       -webkit-background-clip: text;
       -webkit-text-fill-color: transparent;
       background-clip: text;
-      margin-bottom: 20px;
+      
+      animation: gradientShift 6s ease-in-out infinite;
+      text-shadow: 0 0 30px rgba(102, 126, 234, 0.5);
+      transition: background 0.3s ease;
+    }
+	
+	.logo {
+      align-items: center;
+      justify-content: center;
+      background: linear-gradient(45deg, var(--primary-color), var(--secondary-color), var(--accent-color), var(--accent-secondary));
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
       animation: gradientShift 6s ease-in-out infinite;
       text-shadow: 0 0 30px rgba(102, 126, 234, 0.5);
       transition: background 0.3s ease;
@@ -238,12 +250,7 @@ layout: master
       }
     }
 
-    .logo img {
-      width: 80px;
-      height: 80px;
-      filter: drop-shadow(0 0 20px rgba(102, 126, 234, 0.5));
-      animation: pulse 3s ease-in-out infinite;
-    }
+    
 
     @keyframes pulse {
       0%, 100% {
@@ -533,7 +540,7 @@ layout: master
   </style>
 </head>
 
-<body data-theme="light">
+<body data-theme="sunset">
   <div class="container">
 <header class="header fade-in">
      <h1>
@@ -541,7 +548,7 @@ layout: master
     
 <div class="description" style="display: flex; max-width: 1280px; margin: 0 auto; gap: 20px; align-items: center;">
   <div style="flex: 1; max-width: 640px; display: flex; flex-direction: column; justify-content: center;">
-    <h1 class="logo">
+    <h1 class="logo2">
       <a class="navbar-brand" href="/">
         <img src="https://wayfire.org/assets/logo.png" alt="Wayfire Logo">
         Wayfire

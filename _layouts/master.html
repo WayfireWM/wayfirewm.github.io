@@ -764,7 +764,7 @@ body::before {
   background: none !important;
   border: 1px solid rgba(255, 255, 255, 0.2) !important;
 }
-
+<!--
 	.nav-links {
 	background: rgba(255, 255, 255, 0.0);
       border: 1px solid rgba(255, 255, 255, 0.2);
@@ -788,7 +788,38 @@ body::before {
 	  align-items: center;
       z-index: 1000;
     }
+-->
 
+.nav-links {
+    background: rgba(255, 255, 255, 0.0);
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    border-radius: 15px;
+    padding: 5px 5px;
+    font-size: 14px;
+    font-weight: 600;
+    cursor: pointer;
+    backdrop-filter: blur(10px);
+    transition: all 0.3s ease;
+    
+    /* position: fixed; */
+    position: absolute;
+    top: 20px;
+    left: 20px; /* Positioned to the left of the theme selector */
+    display: flex;
+    gap: 10px;
+    justify-content: flex-start; /* Changed from center to flex-start for left alignment */
+    align-items: center;
+    z-index: 1000;
+    
+    /* Ensure container properly wraps content */
+    width: fit-content;
+    min-width: 0;
+    flex-shrink: 0;
+    box-sizing: border-box;
+    
+    /* Clean edge finishing */
+    overflow: hidden;
+}
 
 /* Add this CSS to fix the white hover effect */
 .nav-link {
@@ -867,7 +898,8 @@ body::before {
     <title>{{ page.title }}</title>
   </head>
   <body>
-  <body data-theme="light">
+  <body data-theme="sunset">
+<!--
   <div class="theme-selector">
     <select class="theme-dropdown" id="themeSelector">
 	  <option value="light">☀️ Light Theme</option>
@@ -878,7 +910,7 @@ body::before {
       <option value="cosmic">🚀 Black/White</option>
     </select>
   </div>
-  
+-->  
   <nav class="nav-links">
   <h1 class="logo">
   <a class="navbar-brand" href="/">
