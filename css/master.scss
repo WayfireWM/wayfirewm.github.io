@@ -1,7 +1,7 @@
 ---
 ---
 
-@import "bootstrap/scss/bootstrap";
+/*@import "bootstrap/scss/bootstrap";*/
 
 html {
   height: 100%;
@@ -224,4 +224,7 @@ hr {
 .highlight .nv, .highlight .vc, .highlight .vg, .highlight .vi, .highlight .vm {
   color: #a8e1fe;
   font-weight: bold;
+}
+.highlight a {
+  color: var(--primary-color);
 }
