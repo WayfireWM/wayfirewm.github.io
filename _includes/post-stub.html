@@ -1,21 +1,12 @@
-<div class="post-stub">
-    <h2>
-      <span class="title">
-        {% if include.post._url %}
-        <a href="{{ include.post._url }}" target="_blank">
-          {{ include.post.title }}
-          <i class="fa fa-external-link"></i>
-        </a>
-        {% else %}
-        <a href="{{ include.post.url }}">{{ include.post.title }}</a>
-        {% endif %}
-      </span>
-      <small class="text-muted hidden-xs">
-        {{ include.post.date | date: "%Y-%m-%d" }}
-      </small>
-    </h2>
-    {% if include.post._url %}
-    {% else %}
-    {{ include.post.excerpt }}
+<article class="blog-post fade-in" onclick="window.location.href='{{ include.post.url }}'">
+  <h3 class="post-title">
+    {{ include.post.title }}
+    {% if include.post.version %}
+    <span class="version-badge">{{ include.post.version }}</span>
     {% endif %}
-</div>
+  </h3>
+  <p class="post-date">{{ include.post.date | date: "%B %d, %Y" }}</p>
+  <p class="post-excerpt">
+    {{ include.post.excerpt }}
+  </p>
+</article>
