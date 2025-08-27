@@ -3,7 +3,8 @@ layout: post
 title: "X11 -> WLC -> libweston -> wlroots: how the current Wayfire came to be"
 ---
 
-Wayfire is a project which has had 4 versions and has been rewritten 3 times. In this blog post I'll try to outline why those rewrites were necessary.
+Wayfire is a project which has had <span>4 versions</span> and has been rewritten <span>3 times</span>. In this blog post I'll try to outline why those rewrites were necessary.
+<!--more-->
 
 # The "dark" X11 era
 

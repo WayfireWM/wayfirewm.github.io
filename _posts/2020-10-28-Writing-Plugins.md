@@ -3,7 +3,8 @@ layout: post
 title: "Writing Wayfire plugins (Part 2)"
 ---
 
-Hello everyone, this is the next blog in the series about writing Wayfire plugins. Again, I will be writing a custom plugin and explaining the steps along the way. This time however the focus will be on the rendering parts of Wayfire.
+Hello everyone, this is the next blog in the series about writing Wayfire plugins. Again, I will be writing a custom plugin and explaining the steps along the way. This time however the focus will be on the <span class="highlight">rendering parts</span> of Wayfire.
+<!--more-->
 
 ## Prerequisites
 

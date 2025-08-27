@@ -6,7 +6,8 @@ title: "Writing Wayfire plugins (Part 1)"
 If someone were to ask me what is the greatest aspect of Wayfire, then this would undoubtedly be its customizability and modularity.
 There are a ton of options you can tweak to your liking.
 However, options are rarely enough if you want to make your desktop truly your own.
-And this is why Wayfire uses a plugin architecture.
+And this is why Wayfire uses a <span class="highlight">plugin architecture</span>.
+<!--more-->
 
 Plugins in Wayfire are very powerful, and in fact, they provide most of the user interface.
 This means that by changing them, you can change almost every aspect of the compositor.
