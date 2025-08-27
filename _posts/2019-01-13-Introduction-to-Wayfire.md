@@ -3,7 +3,7 @@ layout: post
 title: Introduction to Wayfire
 ---
 
-Hello all, I've recently been spending a lot of time developing [Wayfire](https://github.com/WayfireWM/wayfire), so with the help of Drew DeVault (a huge thanks for setting up the blog) I decided to start telling more about it.
+Hello all, I've recently been spending a lot of time developing Wayfire, so with the help of Drew DeVault (a huge thanks for setting up the blog) I decided to start telling more about it.
 <!--more-->
 
 So what is Wayfire? Wayfire is a 3D floating wayland compositor, utilizing [wlroots](https://github.com/swaywm/wlroots). For those of you unfamiliar with wayland, a wayland compositor is similar to compositing window managers in the X11 world. It is that one piece of software that coordinates all of your input and output devices and manages all of your opened applications.
